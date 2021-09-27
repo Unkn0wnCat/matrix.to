@@ -114,7 +114,7 @@ export class Link {
 
         let [identifier, eventId] = linkStr.split("/");
 
-        if(linkStr.startsWith("matrix:") || linkStr.startsWith("u/") || linkStr.startsWith("roomid/")) {
+        if(linkStr.startsWith("matrix:") || linkStr.startsWith("u/") || linkStr.startsWith("r/") || linkStr.startsWith("roomid/")) {
             const split = linkStr.split("/");
 
             if(split.length < 2) return null;
