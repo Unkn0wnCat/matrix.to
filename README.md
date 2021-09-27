@@ -63,6 +63,17 @@ visitors.
 (Technically the # and @ in the URL fragment should probably be escaped, but in
 practice for legibility we bend the rules and include it verbatim)
 
+Alternatively URLs can also be formatted in the matrix-URI scheme:
+
+| Entity type: | Example URL                                                          |
+|--------------|----------------------------------------------------------------------|
+| Rooms:       | https://matrix.to/#/r/matrix:matrix.org                              |
+| Rooms by ID: | https://matrix.to/#/roomid/cURbafjkfsMDVwdRDQ:matrix.org             |
+| Users:       | https://matrix.to/#/u/matthew:matrix.org                             |
+| Messages:    | https://matrix.to/#/r/matrix:matrix.org/e/$1448831580433WbpiJ:jki.re |
+
+Any of these identifiers may also be prefixed with `matrix:` (e.g. https://matrix.to/#/matrix:r/matrix:matrix.org).
+
 You can discuss matrix.to in
 [`#matrix.to:matrix.org`](https://matrix.to/#/#matrix.to:matrix.org)
 
