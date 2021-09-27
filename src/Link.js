@@ -17,9 +17,9 @@ limitations under the License.
 import {createEnum} from "./utils/enum.js";
 import {orderedUnique} from "./utils/unique.js";
 
-const ROOMALIAS_PATTERN = /^#([^:]*):(.+)$/;
-const ROOMID_PATTERN = /^!([^:]*):(.+)$/;
-const USERID_PATTERN = /^@([^:]+):(.+)$/;
+const ROOMALIAS_PATTERN = /^(?:(?:#)|(?:(?:matrix:)?r\/))([^:]*):(.+)$/;
+const ROOMID_PATTERN = /^(?:(?:!)|(?:(?:matrix:)?roomid\/))([^:]*):(.+)$/;
+const USERID_PATTERN = /^(?:(?:@)|(?:(?:matrix:)?u\/))([^:]*):(.+)$/;
 const EVENTID_PATTERN = /^$([^:]+):(.+)$/;
 const GROUPID_PATTERN = /^\+([^:]+):(.+)$/;
 
@@ -111,7 +111,21 @@ export class Link {
             return null;
         }
         linkStr = linkStr.substr(2);
-        const [identifier, eventId] = linkStr.split("/");
+
+        let [identifier, eventId] = linkStr.split("/");
+
+        if(linkStr.startsWith("matrix:") || linkStr.startsWith("u/") || linkStr.startsWith("roomid/")) {
+            const split = linkStr.split("/");
+
+            if(split.length < 2) return null;
+            
+            identifier = split.slice(0, 2).join("/");
+            eventId = null;
+
+            if(split.length === 4 && split[2] === "e") {
+                eventId = split[3];
+            }
+        }
 
         let viaServers = [];
         let clientId = null;
